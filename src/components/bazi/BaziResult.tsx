@@ -1,6 +1,6 @@
 'use client';
 
-import { BaziResult } from '@/lib/bazi/types';
+import type { BaziResult } from '@/lib/bazi/types';
 import { motion } from 'framer-motion';
 
 interface BaziResultProps {

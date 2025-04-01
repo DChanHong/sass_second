@@ -43,13 +43,12 @@ export function calculateBazi(input: BaziInput): BaziResult {
       '偏官': '金',
       '正財': '水',
     },
-    elements: {
-      '木': Math.floor(Math.random() * 100),
-      '火': Math.floor(Math.random() * 100),
-      '土': Math.floor(Math.random() * 100),
-      '金': Math.floor(Math.random() * 100),
-      '水': Math.floor(Math.random() * 100),
-    },
+    elements: Object.fromEntries(
+      FIVE_ELEMENTS.map(element => [
+        element,
+        Math.floor(Math.random() * 100)
+      ])
+    ),
     analysis: '이 사주는 강한 목(木)의 기운을 가지고 있습니다. 생년월일시의 조화로운 배치가 좋은 운세를 예고합니다.',
   };
 } 
