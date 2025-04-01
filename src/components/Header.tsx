@@ -19,7 +19,7 @@ export default function Header() {
           <div className="flex items-center space-x-6">
             {/* Desktop Navigation */}
             <nav className="hidden sm:flex items-center space-x-6">
-              <Link 
+              {/* <Link 
                 href="/courses" 
                 className="relative px-2 py-1 text-gray-600 hover:text-emerald-500 transition-colors duration-200 group"
               >
@@ -39,7 +39,7 @@ export default function Header() {
               >
                 멤버십
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-              </Link>
+              </Link> */}
               <Link
                 href="/login"
                 className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors duration-200 shadow-sm hover:shadow-md"
