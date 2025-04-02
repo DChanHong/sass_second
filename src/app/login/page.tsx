@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AuthError } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -14,8 +14,11 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const message = searchParams.get("message");
+  const supabase = createClientComponentClient();
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -67,11 +70,9 @@ export default function LoginPage() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white pt-16">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="w-full max-w-md p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl relative z-10 border border-emerald-100">
+    <Layout>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white">
+        <div className="w-full max-w-md p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-emerald-100">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,8 +80,18 @@ export default function LoginPage() {
             className="text-center mb-8"
           >
             <h1 className="text-3xl font-bold text-emerald-900 mb-2">로그인</h1>
-            <p className="text-emerald-700">서비스를 이용하려면 로그인해주세요</p>
+            <p className="text-emerald-700">계정에 로그인하세요</p>
           </motion.div>
+
+          {message && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="bg-emerald-50 border border-emerald-200 text-emerald-600 px-4 py-3 rounded-lg mb-6"
+            >
+              {message}
+            </motion.div>
+          )}
 
           {error && (
             <motion.div
@@ -92,54 +103,52 @@ export default function LoginPage() {
             </motion.div>
           )}
 
-          <form onSubmit={handleEmailLogin} className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-emerald-700 mb-1">
                 이메일
               </label>
               <input
                 id="email"
                 type="email"
-                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-200 outline-none"
-                placeholder="이메일을 입력해주세요"
+                className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="example@email.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-emerald-700 mb-1">
                 비밀번호
               </label>
               <input
                 id="password"
                 type="password"
-                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-200 outline-none"
-                placeholder="비밀번호를 입력해주세요"
+                className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="비밀번호 입력"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-emerald-500 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 hover:cursor-pointer"
+              className="w-full py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
             >
-              {loading ? "처리중..." : "로그인"}
+              {loading ? "처리 중..." : "로그인"}
             </button>
-
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
-                계정이 없으신가요?{" "}
-                <Link href="/signup" className="text-emerald-500 hover:text-emerald-600 font-medium hover:cursor-pointer">
-                  회원가입하러 가기
-                </Link>
-              </p>
-            </div>
           </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-emerald-700">
+              계정이 없으신가요?{" "}
+              <Link href="/signup" className="text-emerald-600 hover:text-emerald-800 font-medium">
+                회원가입
+              </Link>
+            </p>
+          </div>
 
           <div className="mt-8">
             <div className="relative">
@@ -194,6 +203,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }

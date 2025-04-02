@@ -20,11 +20,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen min-w-[350px]">
-          <Header />
           <main className="flex-grow">
             {children}
           </main>
-          <Footer />
         </div>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Header from '@/components/Header';
+import Layout from '@/components/Layout';
 import BaziForm from '@/components/bazi/BaziForm';
 import BaziResult from '@/components/bazi/BaziResult';
 import { BaziInput, BaziResult as BaziResultType } from '@/lib/bazi/types';
@@ -41,9 +41,8 @@ export default function BaziPage() {
   };
 
   return (
-    <>
-      <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white pt-16">
+    <Layout>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="w-full max-w-2xl p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl relative z-10 border border-emerald-100">
           <motion.div
@@ -71,6 +70,6 @@ export default function BaziPage() {
           {result && <BaziResult result={result} />}
         </div>
       </div>
-    </>
+    </Layout>
   );
 } 

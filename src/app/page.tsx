@@ -41,7 +41,7 @@ export default function Home() {
       <Header />
       <main className="min-h-screen pt-16">
         {/* Section 1: Hero Section */}
-        <section className="relative h-[70vh] flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white overflow-hidden">
+        <section className="relative h-[50vh] flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           <div className="container mx-auto px-4 z-10">
             <motion.div

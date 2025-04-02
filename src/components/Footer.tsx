@@ -64,7 +64,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white">
+                <Link href="/contact" className="text-emerald-600 hover:text-emerald-800">
                   문의하기
                 </Link>
               </li>
