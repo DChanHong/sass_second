@@ -44,7 +44,11 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          // queryParams:{
+          //   access_type: 'offline',
+          //   prompt: 'offline',
+          // },
+          redirectTo: `${window.location.origin}/api/auth/callback`,
         },
       });
       if (error) throw error;
@@ -59,7 +63,7 @@ export default function LoginPage() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "kakao",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/api/auth/callback`,
         },
       });
       if (error) throw error;
@@ -105,7 +109,10 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-emerald-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-emerald-700 mb-1"
+              >
                 이메일
               </label>
               <input
@@ -119,7 +126,10 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-emerald-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-emerald-700 mb-1"
+              >
                 비밀번호
               </label>
               <input
@@ -144,7 +154,10 @@ export default function LoginPage() {
           <div className="mt-6 text-center">
             <p className="text-emerald-700">
               계정이 없으신가요?{" "}
-              <Link href="/signup" className="text-emerald-600 hover:text-emerald-800 font-medium">
+              <Link
+                href="/signup"
+                className="text-emerald-600 hover:text-emerald-800 font-medium"
+              >
                 회원가입
               </Link>
             </p>
@@ -192,10 +205,12 @@ export default function LoginPage() {
                 className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 shadow-sm rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200 hover:cursor-pointer"
                 onClick={handleKakaoLogin}
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="#FEE500">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                  />
+                <svg
+                  className="w-5 h-5 mr-2"
+                  viewBox="0 0 24 24"
+                  fill="#FEE500"
+                >
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                 </svg>
                 카카오로 로그인
               </button>

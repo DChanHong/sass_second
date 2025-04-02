@@ -108,7 +108,9 @@ export default function SignupPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <h1 className="text-3xl font-bold text-emerald-900 mb-2">회원가입</h1>
+            <h1 className="text-3xl font-bold text-emerald-900 mb-2">
+              회원가입
+            </h1>
             <p className="text-emerald-700">새로운 계정을 만들어보세요</p>
           </motion.div>
 
@@ -124,7 +126,10 @@ export default function SignupPage() {
 
           <form onSubmit={handleSignup} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-emerald-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-emerald-700 mb-1"
+              >
                 이메일
               </label>
               <div className="flex space-x-2">
@@ -150,7 +155,10 @@ export default function SignupPage() {
 
             {verificationSent && !isEmailVerified && (
               <div>
-                <label htmlFor="verificationCode" className="block text-sm font-medium text-emerald-700 mb-1">
+                <label
+                  htmlFor="verificationCode"
+                  className="block text-sm font-medium text-emerald-700 mb-1"
+                >
                   인증 코드
                 </label>
                 <div className="flex space-x-2">
@@ -174,7 +182,10 @@ export default function SignupPage() {
             )}
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-emerald-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-emerald-700 mb-1"
+              >
                 비밀번호
               </label>
               <input
@@ -188,7 +199,10 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-emerald-700 mb-1">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-emerald-700 mb-1"
+              >
                 비밀번호 확인
               </label>
               <input
@@ -213,7 +227,10 @@ export default function SignupPage() {
           <div className="mt-6 text-center">
             <p className="text-emerald-700">
               이미 계정이 있으신가요?{" "}
-              <Link href="/login" className="text-emerald-600 hover:text-emerald-800 font-medium">
+              <Link
+                href="/login"
+                className="text-emerald-600 hover:text-emerald-800 font-medium"
+              >
                 로그인
               </Link>
             </p>
@@ -222,4 +239,4 @@ export default function SignupPage() {
       </div>
     </Layout>
   );
-} 
+}

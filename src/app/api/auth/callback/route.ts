@@ -7,8 +7,17 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get("code");
 
   if (code) {
-    const supabase = createRouteHandlerClient({ cookies });
-    await supabase.auth.exchangeCodeForSession(code);
+    const cookieStore = cookies();
+    const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+
+    try {
+      await supabase.auth.exchangeCodeForSession(code);
+    } catch (error) {
+      console.error("Auth callback error:", error);
+      return NextResponse.redirect(
+        `${requestUrl.origin}/login?error=Authentication failed`
+      );
+    }
   }
 
   // URL to redirect to after sign in process completes
