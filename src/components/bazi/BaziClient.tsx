@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import BaziForm from "@/components/bazi/BaziForm";
 import BaziResult from "@/components/bazi/BaziResult";
 import { BaziInput, BaziResult as BaziResultType } from "@/lib/bazi/types";
+import clientAxios from "@/lib/axiosInstance/client";
 
 export default function BaziClient() {
   const [loading, setLoading] = useState(false);
@@ -17,23 +18,8 @@ export default function BaziClient() {
     setResult(null);
 
     try {
-      const response = await fetch("/api/bazi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || "사주팔자 계산 중 오류가 발생했습니다."
-        );
-      }
-
-      const resultData = await response.json();
-      setResult(resultData);
+      const response = await clientAxios.post("/bazi", data);
+      setResult(response.data);
     } catch (err) {
       setError(
         err instanceof Error
@@ -46,7 +32,7 @@ export default function BaziClient() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white">
+    <div className="py-20 flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="w-full max-w-2xl p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl relative z-10 border border-emerald-100">
         <motion.div

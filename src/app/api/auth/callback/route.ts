@@ -16,20 +16,12 @@ export async function GET(request: Request) {
             process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
             {
                 cookies: {
-                    get: (name) => cookieStore.get(name)?.value,
-                    set: (name, value, options) => {
-                        // 쿠키 값을 문자열로 처리하여 파싱 오류 방지
-                        response.cookies.set({
-                            name,
-                            value: value.toString(),
-                            ...options
-                        });
+                    getAll() {
+                        return cookieStore.getAll(); // 모든 쿠키 가져오기
                     },
-                    remove: (name, options) => {
-                        response.cookies.set({
-                            name,
-                            value: "",
-                            ...options
+                    setAll(cookiesToSet) {
+                        cookiesToSet.forEach(({ name, value, options }) => {
+                            cookieStore.set(name, value, options); // 쿠키 설정
                         });
                     },
                 },

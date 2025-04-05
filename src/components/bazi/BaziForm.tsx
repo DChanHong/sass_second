@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {ChangeEvent, useState} from "react";
 import { BaziInput } from "@/lib/bazi/types";
 
 interface BaziFormProps {
@@ -24,7 +24,7 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

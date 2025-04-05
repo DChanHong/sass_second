@@ -1,30 +1,37 @@
 import {NextResponse} from "next/server";
 import {getServerSession} from "@/lib/supabase/userAuth";
+import {User} from "@/lib/supabase/types";
 
-export async function userWrapper(handler: Function) {
-    return async (request: Request) => {
+// Supabase user를 추가한 Request 타입
+export type RequestWithUser = Request & {
+    user: User;
+};
+
+
+export function userWrapper(handler: (req: RequestWithUser) => Promise<Response>) {
+    return async (request: Request): Promise<Response> => {
         try {
-            // Get the session
-            const session = await getServerSession()
+            const session = await getServerSession();
+            console.log("session", session);
 
             if (!session) {
                 return NextResponse.json({error: "Unauthorized"}, {status: 401});
             }
 
-            // Add the user to the request context
-            const requestWithUser = {
-                ...request,
-                user: session.user,
-            };
+            const reqWithUser = request as RequestWithUser;
 
-            // Call the handler with the modified request
-            return handler(requestWithUser);
+            reqWithUser.user = {
+                id: session.user?.id || '',
+                email: session.user?.email || '',
+                name: session.user?.user_metadata?.name || '',
+                provider: session.user?.app_metadata?.provider || '',
+            }
+
+
+            return handler(reqWithUser);
         } catch (error) {
-            console.error("API Error:", error);
-            return NextResponse.json(
-                {error: "Internal server error"},
-                {status: 500}
-            );
+            console.error("userWrapper Error:", error);
+            return NextResponse.json({error: "Internal server error"}, {status: 500});
         }
     };
 }

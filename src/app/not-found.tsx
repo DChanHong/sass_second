@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function NotFound() {
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white pt-16">
+      <div className="min-h-[70vh] flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white pt-16">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="w-full max-w-md p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl relative z-10 border border-emerald-100 text-center">
           <motion.div
