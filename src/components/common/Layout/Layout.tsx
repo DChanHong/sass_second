@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import {Fragment, ReactNode} from "react";
 import ServerHeader from "../header/ServerHeader";
 import ClientLayout from "./ClientLayout";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
   paddingTop?: boolean;
 }
 

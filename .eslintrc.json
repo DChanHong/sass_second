@@ -40,6 +40,9 @@
     // 일반적인 규칙
     "no-console": "warn", // console.log 등 경고로 표시
     "quotes": ["warn", "double"], // 쌍따옴표 사용
-    "semi": ["warn", "always"] // 세미콜론 필수
+    "semi": ["warn", "always"], // 세미콜론 필수
+
+    "@typescript-eslint/no-unsafe-function-type": "off"
+
   }
 }
