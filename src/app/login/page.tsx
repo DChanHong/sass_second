@@ -1,11 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter, useSearchParams } from "next/navigation";
 import { AuthError } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
-import Layout from "@/components/Layout";
+import Layout from "@/components/common/Layout/ClientLayout";
 import Link from "next/link";
 
 export default function LoginPage() {
@@ -13,9 +11,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const message = searchParams.get("message");
   const supabase = createClientComponentClient();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -30,7 +25,6 @@ export default function LoginPage() {
       });
 
       if (error) throw error;
-      router.push("/");
     } catch (error) {
       const authError = error as AuthError;
       setError(authError.message);
@@ -39,43 +33,28 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleOAuthLogin = async (provider: "google" | "kakao") => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+        provider,
         options: {
-          // queryParams:{
-          //   access_type: 'offline',
-          //   prompt: 'offline',
-          // },
+          queryParams: {
+            access_type: "offline",
+            prompt: "consent",
+          },
           redirectTo: `${window.location.origin}/api/auth/callback`,
         },
       });
+
       if (error) throw error;
     } catch (error) {
       const authError = error as AuthError;
       setError(authError.message);
     }
   };
-
-  const handleKakaoLogin = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "kakao",
-        options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
-        },
-      });
-      if (error) throw error;
-    } catch (error) {
-      const authError = error as AuthError;
-      setError(authError.message);
-    }
-  };
-
   return (
     <Layout>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white py-20">
         <div className="w-full max-w-md p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-emerald-100">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -86,16 +65,6 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold text-emerald-900 mb-2">로그인</h1>
             <p className="text-emerald-700">계정에 로그인하세요</p>
           </motion.div>
-
-          {message && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="bg-emerald-50 border border-emerald-200 text-emerald-600 px-4 py-3 rounded-lg mb-6"
-            >
-              {message}
-            </motion.div>
-          )}
 
           {error && (
             <motion.div
@@ -176,8 +145,8 @@ export default function LoginPage() {
             <div className="mt-8 space-y-4">
               <button
                 type="button"
+                onClick={() => handleOAuthLogin("google")}
                 className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 shadow-sm rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200 hover:cursor-pointer"
-                onClick={handleGoogleLogin}
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
@@ -202,8 +171,8 @@ export default function LoginPage() {
 
               <button
                 type="button"
+                onClick={() => handleOAuthLogin("kakao")}
                 className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 shadow-sm rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors duration-200 hover:cursor-pointer"
-                onClick={handleKakaoLogin}
               >
                 <svg
                   className="w-5 h-5 mr-2"

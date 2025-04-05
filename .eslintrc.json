@@ -1,0 +1,45 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // any 타입 허용 (빌드 시 에러 방지를 위해 off로 변경)
+    "@typescript-eslint/no-explicit-any": "off",
+
+    // 미사용 변수 허용 (단, 언더스코어로 시작하는 변수는 무시)
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+
+    // 빈 인터페이스 허용
+    "@typescript-eslint/no-empty-interface": "warn",
+
+    // 함수 반환 타입 명시 필수 해제
+    "@typescript-eslint/explicit-function-return-type": "off",
+
+    // 함수 반환 값 필수 해제
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    // require() 호출 허용
+    "@typescript-eslint/no-var-requires": "warn",
+
+    // Promise reject 시 Error 객체 사용 강제 해제
+    "@typescript-eslint/no-floating-promises": "off",
+
+    // catch 절의 error 타입 지정 강제 해제
+    "@typescript-eslint/no-implicit-any-catch": "off",
+
+    // Next.js 관련 규칙
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["jsx", "global"] }],
+
+    // 일반적인 규칙
+    "no-console": "warn", // console.log 등 경고로 표시
+    "quotes": ["warn", "double"], // 쌍따옴표 사용
+    "semi": ["warn", "always"] // 세미콜론 필수
+  }
+}

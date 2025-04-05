@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Layout from '@/components/Layout';
-import BaziForm from '@/components/bazi/BaziForm';
-import BaziResult from '@/components/bazi/BaziResult';
-import { BaziInput, BaziResult as BaziResultType } from '@/lib/bazi/types';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Layout from "@/components/common/Layout/ClientLayout";
+import BaziForm from "@/components/bazi/BaziForm";
+import BaziResult from "@/components/bazi/BaziResult";
+import { BaziInput, BaziResult as BaziResultType } from "@/lib/bazi/types";
 
 export default function BaziPage() {
   const [loading, setLoading] = useState(false);
@@ -18,23 +18,29 @@ export default function BaziPage() {
     setResult(null);
 
     try {
-      const response = await fetch('/api/bazi', {
-        method: 'POST',
+      const response = await fetch("/api/bazi", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || '사주팔자 계산 중 오류가 발생했습니다.');
+        throw new Error(
+          errorData.error || "사주팔자 계산 중 오류가 발생했습니다."
+        );
       }
 
       const resultData = await response.json();
       setResult(resultData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : '사주팔자 계산 중 오류가 발생했습니다.');
+      setError(
+        err instanceof Error
+          ? err.message
+          : "사주팔자 계산 중 오류가 발생했습니다."
+      );
     } finally {
       setLoading(false);
     }
@@ -51,8 +57,12 @@ export default function BaziPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-8"
           >
-            <h1 className="text-3xl font-bold text-emerald-900 mb-2">사주팔자 계산</h1>
-            <p className="text-emerald-700">생년월일시를 입력하여 운세를 확인해보세요</p>
+            <h1 className="text-3xl font-bold text-emerald-900 mb-2">
+              사주팔자 계산
+            </h1>
+            <p className="text-emerald-700">
+              생년월일시를 입력하여 운세를 확인해보세요
+            </p>
           </motion.div>
 
           {error && (
@@ -72,4 +82,4 @@ export default function BaziPage() {
       </div>
     </Layout>
   );
-} 
+}

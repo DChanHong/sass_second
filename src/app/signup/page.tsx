@@ -5,8 +5,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { AuthError } from "@supabase/supabase-js";
 import { motion } from "framer-motion";
-import Layout from "@/components/Layout";
 import Link from "next/link";
+import Layout from "@/components/common/Layout/ClientLayout";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");

@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
+  console.log("code", code);
 
   if (code) {
     const cookieStore = cookies();
@@ -12,6 +13,9 @@ export async function GET(request: Request) {
 
     try {
       await supabase.auth.exchangeCodeForSession(code);
+
+      // 인증 성공 시 항상 홈화면으로 리다이렉트
+      return NextResponse.redirect(new URL("/", requestUrl.origin));
     } catch (error) {
       console.error("Auth callback error:", error);
       return NextResponse.redirect(
@@ -20,6 +24,6 @@ export async function GET(request: Request) {
     }
   }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin);
+  // 코드가 없는 경우도 홈화면으로 리다이렉트
+  return NextResponse.redirect(new URL("/", requestUrl.origin));
 }

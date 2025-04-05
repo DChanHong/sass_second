@@ -1,35 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function Header() {
+interface HeaderProps {
+  isLoggedIn: boolean;
+}
+
+export default function Header({ isLoggedIn }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
-
-  useEffect(() => {
-    const checkUser = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      console.log(session);
-      setIsLoggedIn(!!session);
-    };
-
-    checkUser();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLoggedIn(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [supabase.auth]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -59,7 +42,7 @@ export default function Header() {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="px-4 py-2 text-emerald-600 hover:text-emerald-800 transition-colors duration-200"
+                    className="px-4 py-2 text-emerald-600 hover:text-white hover:bg-emerald-600 rounded-lg transition-all duration-200 border border-emerald-600 hover:shadow-md hover:cursor-pointer "
                   >
                     로그아웃
                   </button>
@@ -119,7 +102,7 @@ export default function Header() {
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="block px-4 py-2 text-emerald-500 hover:bg-emerald-50 font-medium transition-colors duration-200 text-left w-full"
+                    className="block w-full px-4 py-2 text-emerald-500 hover:text-white hover:bg-emerald-500 font-medium transition-all duration-200 text-left rounded-lg"
                   >
                     로그아웃
                   </button>

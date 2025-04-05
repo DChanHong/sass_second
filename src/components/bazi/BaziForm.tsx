@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { BaziInput } from '@/lib/bazi/types';
+import { useState } from "react";
+import { BaziInput } from "@/lib/bazi/types";
 
 interface BaziFormProps {
   onSubmit: (data: BaziInput) => Promise<void>;
@@ -15,7 +15,7 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
     day: new Date().getDate(),
     hour: new Date().getHours(),
     minute: new Date().getMinutes(),
-    gender: 'male',
+    gender: "male",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,11 +23,13 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
     await onSubmit(formData);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: name === 'gender' ? value : Number(value),
+      [name]: name === "gender" ? value : Number(value),
     }));
   };
 
@@ -35,7 +37,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="year"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             년도
           </label>
           <input
@@ -52,7 +57,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
         </div>
 
         <div>
-          <label htmlFor="month" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="month"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             월
           </label>
           <input
@@ -69,7 +77,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
         </div>
 
         <div>
-          <label htmlFor="day" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="day"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             일
           </label>
           <input
@@ -86,7 +97,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
         </div>
 
         <div>
-          <label htmlFor="hour" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="hour"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             시간
           </label>
           <input
@@ -103,7 +117,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
         </div>
 
         <div>
-          <label htmlFor="minute" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="minute"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             분
           </label>
           <input
@@ -120,7 +137,10 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
         </div>
 
         <div>
-          <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="gender"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             성별
           </label>
           <select
@@ -146,4 +166,4 @@ export default function BaziForm({ onSubmit, loading }: BaziFormProps) {
       </button>
     </form>
   );
-} 
+}
