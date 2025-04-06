@@ -17,7 +17,7 @@ import {
  */
 export const generateWheelChart = async (
   data: WesternAstrologyFormData
-): Promise<WheelChartResponse> => {
+): Promise<any> => {
   try {
     return await fetchWheelChart(data);
   } catch (error: any) {

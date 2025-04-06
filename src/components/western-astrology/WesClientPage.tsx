@@ -40,8 +40,8 @@ export default function WesClientPage() {
     try {
       const result = await generateWheelChart(formData);
 
-      if (result.success) {
-        setWheelChartUrl(result.wheelChartUrl);
+      if (result) {
+        setWheelChartUrl(result || "");
       } else {
         setError(result.message || "휠차트 생성 중 오류가 발생했습니다.");
       }
@@ -232,7 +232,7 @@ export default function WesClientPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="hover:cursor-pointer px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="hover:c px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "처리 중..." : "휠차트 생성"}
               </button>

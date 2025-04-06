@@ -11,12 +11,13 @@ import {
  */
 export const fetchWheelChart = async (
   data: WesternAstrologyFormData
-): Promise<WheelChartResponse> => {
+): Promise<any> => {
   const response = await clientAxios.post<WheelChartResponse>(
     "/astrology/wheel-chart",
     data
   );
-  return response.data;
+  console.log("response", response.data);
+  return response?.data?.output || "";
 };
 
 /**

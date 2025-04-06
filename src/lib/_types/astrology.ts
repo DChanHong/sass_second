@@ -1,3 +1,5 @@
+import { output } from "framer-motion/client";
+
 /**
  * 서양 점성술 폼 데이터 타입
  */
@@ -17,7 +19,7 @@ export interface WesternAstrologyFormData {
  * 휠차트 응답 타입
  */
 export interface WheelChartResponse {
-  wheelChartUrl: string;
+  output: string;
   success: boolean;
   message?: string;
 }
