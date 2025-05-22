@@ -18,6 +18,7 @@ async function authenticateRequest(request: NextRequest) {
     // 로그인이 필요한 페이지에 접근하려 할 때 로그인이 되어있지 않으면 로그인 페이지로 리다이렉트
     if (!session && !isPublicRoute) {
         console.log("로그인 필요");
+        // 커밋 테스트
         const redirectUrl = new URL("/login", request.url);
         return NextResponse.redirect(redirectUrl);
     }
