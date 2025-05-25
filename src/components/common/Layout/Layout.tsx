@@ -1,17 +1,21 @@
-import {Fragment, ReactNode} from "react";
-import ServerHeader from "../header/ServerHeader";
-import ClientLayout from "./ClientLayout";
+import { Fragment, ReactNode } from 'react'
+import ServerHeader from '@/components/common/header/ServerHeader'
+import ClientLayout from '@/components/common/Layout/ClientLayout'
+
 
 interface LayoutProps {
-  children: ReactNode;
-  paddingTop?: boolean;
+    children: ReactNode;
+    mainLayoutOption?: {
+        className?: string;
+        paddingTop?: boolean;
+    }
 }
 
-export default function Layout({ children, paddingTop = true }: LayoutProps) {
-  return (
-    <Fragment>
-      <ServerHeader />
-      <ClientLayout paddingTop={paddingTop}>{children}</ClientLayout>
-    </Fragment>
-  );
+export default function Layout({ children, mainLayoutOption = {} }: LayoutProps) {
+    return (
+        <Fragment>
+            <ServerHeader />
+            <ClientLayout mainLayoutOption={mainLayoutOption}>{children}</ClientLayout>
+        </Fragment>
+    )
 }
