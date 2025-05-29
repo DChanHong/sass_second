@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Section1() {
     return (
         <section
             className="relative min-h-[600px] h-[50vh] flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white overflow-hidden">
             <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-            <div className="container mx-auto px-4 z-10">
+            <div className="container mx-auto px-4 z-10 ">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

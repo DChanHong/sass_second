@@ -6,7 +6,7 @@ import Section2 from '@/components/main/Section2';
 
 export default function MainContent() {
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen w-[95%] m-auto sm:w-full">
             <Section1 />
             <Section2 />
             <Section3 />
