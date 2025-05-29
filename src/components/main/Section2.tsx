@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const mbtiCards = [
     {
@@ -100,7 +100,7 @@ const mbtiCards = [
         icon: '🚀',
         color: 'from-indigo-600 to-purple-600'
     }
-]
+];
 
 
 export default function Section2() {
@@ -132,7 +132,7 @@ export default function Section2() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
                             <Link
-                                href={'/'}
+                                href={'/content'}
                                 className="block p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 hover:cursor-pointer group"
                             >
                                 <div className="flex items-center space-x-4">
@@ -154,5 +154,5 @@ export default function Section2() {
                 </div>
             </div>
         </section>
-    )
+    );
 }
