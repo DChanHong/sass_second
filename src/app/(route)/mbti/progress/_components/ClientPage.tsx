@@ -6,10 +6,12 @@ import { Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import { mbtiQuestionMockupData } from '@/mockupData';
 import QuestionCard from '@/app/(route)/mbti/progress/_components/QuestionCard';
+import { useRouter } from 'next/navigation';
 
 const ClientPage = () => {
     const swiperRef = useRef<any>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const router = useRouter();
 
     const handleSelect = (option: string, index: number) => {
         if (swiperRef.current && index < mbtiQuestionMockupData.length - 1) {
@@ -70,11 +72,25 @@ const ClientPage = () => {
                                     question={q.question}
                                     options={q.options}
                                     onSelect={(option) => handleSelect(option, idx)}
+                                    isLast={idx === mbtiQuestionMockupData.length - 1} // ✅ 전달
                                 />
                             </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                {currentIndex === mbtiQuestionMockupData.length - 1 && (
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+                        <button
+                            className="cursor-pointer bg-indigo-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-indigo-600 transition-all duration-300"
+                            type={'button'}
+                            onClick={() => {
+                                router.push('/mbti/complete');
+                            }}
+                        >
+                            결과 확인하기
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
 
