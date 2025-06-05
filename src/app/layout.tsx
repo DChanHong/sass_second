@@ -9,11 +9,11 @@ export const metadata = {
     title: 'MBTI 자취 테스트',
     description: '자취 스타일에 맞는 공간을 추천받아보세요!',
     keywords: ['MBTI', '자취', '공간 추천', '자취 테스트'],
-    authors: [{ name: 'Your Team Name', url: 'https://sass-second.vercel.app' }],
+    authors: [{ name: 'hong', url: `${process.env.NEXT_PUBLIC_SERVICE_DOMAIN}` }],
     openGraph: {
         title: 'MBTI 자취 테스트',
         description: '나에게 맞는 자취 공간 스타일을 찾아보세요.',
-        url: 'https://sass-second.vercel.app',
+        url: `${process.env.NEXT_PUBLIC_SERVICE_DOMAIN}`,
         siteName: 'MBTI 자취',
         images: [
             {
@@ -24,12 +24,6 @@ export const metadata = {
             }
         ],
         type: 'website'
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'MBTI 자취 테스트',
-        description: '자취 스타일 추천 받아보기!',
-        images: ['/mbti_graph_img.webp']
     }
 };
 
