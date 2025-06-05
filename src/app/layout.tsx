@@ -1,13 +1,37 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-    title: 'MBTI 자취템 추천 - 나만의 자취 공간을 찾아보세요',
-    description: 'MBTI 성향에 따라 딱 맞는 자취템을 추천해드립니다. 공간 활용, 인테리어 취향, 실용성까지 모두 고려한 스마트한 쇼핑 경험을 지금 시작하세요.'
-}
+// ✅ SEO 전용 메타데이터
+export const metadata = {
+    title: 'MBTI 자취 테스트',
+    description: '자취 스타일에 맞는 공간을 추천받아보세요!',
+    keywords: ['MBTI', '자취', '공간 추천', '자취 테스트'],
+    authors: [{ name: 'Your Team Name', url: 'https://sass-second.vercel.app' }],
+    openGraph: {
+        title: 'MBTI 자취 테스트',
+        description: '나에게 맞는 자취 공간 스타일을 찾아보세요.',
+        url: 'https://sass-second.vercel.app',
+        siteName: 'MBTI 자취',
+        images: [
+            {
+                url: '/mbti_graph_img.webp', // public 디렉토리에 위치한 OG 이미지
+                width: 1200,
+                height: 630,
+                alt: 'MBTI 자취 테스트 이미지'
+            }
+        ],
+        type: 'website'
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'MBTI 자취 테스트',
+        description: '자취 스타일 추천 받아보기!',
+        images: ['/mbti_graph_img.webp']
+    }
+};
 
 
 export default function RootLayout({
@@ -23,5 +47,5 @@ export default function RootLayout({
         </div>
         </body>
         </html>
-    )
+    );
 }
