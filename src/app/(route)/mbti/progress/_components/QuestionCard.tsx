@@ -2,17 +2,26 @@
 
 import React from 'react';
 
+
 interface QuestionCardProps {
     current: number;
     total: number;
     question: string;
     options: string[];
-    onSelect: (option: string) => void;
-    isLast?: boolean; // ✅ 추가
-
+    onSelect: (option: string, index: number) => void;
+    selectedOption?: string;
+    isLast?: boolean;
 }
 
-export default function QuestionCard({ current, total, question, options, onSelect, isLast }: QuestionCardProps) {
+export default function QuestionCard({
+                                         current,
+                                         total,
+                                         question,
+                                         options,
+                                         selectedOption,
+                                         onSelect,
+                                         isLast
+                                     }: QuestionCardProps) {
     return (
         <section className="w-full h-full flex flex-col justify-between">
             {/* 상단 진행도 */}
@@ -28,15 +37,23 @@ export default function QuestionCard({ current, total, question, options, onSele
 
             {/* 답변 선택지 */}
             <div className="flex flex-col gap-4">
-                {options.map((option, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => onSelect(option)}
-                        className="w-full px-6 py-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-medium shadow-sm hover:shadow-md transition-all"
-                    >
-                        {option}
-                    </button>
-                ))}
+                {options.map((option, idx) => {
+                    const isSelected = selectedOption === option;
+                    return (
+                        <button
+                            type="button"
+                            key={idx}
+                            onClick={() => onSelect(option, current - 1)}
+                            className={`hover:cursor-pointer w-full px-6 py-4 rounded-xl font-medium shadow-sm transition-all
+                                ${isSelected
+                                ? 'bg-emerald-600 text-white border-emerald-600 shadow-md'
+                                : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 hover:shadow-md'}
+                                `}
+                        >
+                            {option}
+                        </button>
+                    );
+                })}
             </div>
 
             {/* 아래 스와이프 안내 */}
