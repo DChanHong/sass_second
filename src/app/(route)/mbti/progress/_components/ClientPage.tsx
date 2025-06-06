@@ -1,10 +1,12 @@
 'use client';
 import React from 'react';
-import { ServerProgressProps } from '@/app/(route)/mbti/progress/page';
 import DirectItem from '@/app/(route)/mbti/progress/_components/DirectItem';
 import MbtiStart from '@/app/(route)/mbti/progress/_components/MbtiStart';
 
-const ClientPage = ({ step, scene }: ServerProgressProps) => {
+const ClientPage = ({ step, scene }: {
+    step: string;
+    scene: string;
+}) => {
 
 
     const renderTest = (step: string, scene: string) => {
