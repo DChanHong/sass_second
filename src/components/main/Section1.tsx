@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { RefObject } from 'react';
 
-export default function Section1() {
+export default function Section1({ ctaRef }: { ctaRef: RefObject<HTMLAnchorElement | null>; }) {
     return (
         <section
             className="relative min-h-[600px] h-[50vh] flex items-center justify-center bg-gradient-to-b from-emerald-50 via-teal-50 to-white overflow-hidden">
@@ -45,6 +46,7 @@ export default function Section1() {
 
                     {/* CTA 버튼 */}
                     <Link
+                        ref={ctaRef}
                         href="/mbti/start"
                         className="inline-block bg-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-emerald-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
                     >
