@@ -1,22 +1,30 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { mbtiSceneQuestionMap } from '@/mockupData';
-import { mbtiTypesDetailed } from '@/mockupData/mbti';
+import { mbtiSceneQuestionMap, mbtiSituationMockupData } from '@/mockupData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import QuestionCard from '@/app/(route)/mbti/progress/_components/QuestionCard';
 import { Question } from '@/app/(route)/mbti/progress/_type';
+import { MBTIResponse } from '@/types/mbti';
+
+/**
+ * MBTI 상황으로 테스트 바로 진행
+ */
 
 interface IProps {
     step: string;
     scene: string;
+    mbtiList: MBTIResponse[];
+    completeTest: (data: any) => void;
+    setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const DirectItem = ({ step, scene }: IProps) => {
-    const [selectedMbti, setSelectedMbti] = useState<string | null>(null);
+const DirectItem = ({ step, scene, mbtiList, completeTest }: IProps) => {
+    const sceneObj = mbtiSituationMockupData.find((fi) => fi.code === scene);
+    const [selectedMbti, setSelectedMbti] = useState<{ code: string, name: string } | null>(null);
     const swiperRef = useRef<any>(null);
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,8 +54,8 @@ const DirectItem = ({ step, scene }: IProps) => {
         [questions.length]
     );
 
-    const mbtiSelect = useCallback((type: string) => {
-        setSelectedMbti(type);
+    const mbtiSelect = useCallback((code: string, name: string) => {
+        setSelectedMbti({ code: code, name: name });
     }, []);
 
     useEffect(() => {
@@ -61,22 +69,25 @@ const DirectItem = ({ step, scene }: IProps) => {
 
     return (
         <>
+
             {!selectedMbti ? (
                 <div>
                     <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                         당신의 MBTI를 선택해주세요
                     </h2>
                     <div className="grid grid-cols-4 gap-3">
-                        {mbtiTypesDetailed.map(({ type, bg, text, tone }) => (
+                        {mbtiList.map(({ name, code, bgColor, textColor, title }) => (
                             <button
-                                key={type}
-                                title={tone}
-                                className={`h-[60px] hover:cursor-pointer flex items-center justify-center text-sm sm:text-base font-semibold rounded-xl shadow-md hover:scale-105 transition-all duration-200 ${bg} ${text}`}
-                                onClick={() => mbtiSelect(type)}
+                                key={name}
+                                title={title}
+                                className={`h-[60px] hover:cursor-pointer flex items-center justify-center text-sm sm:text-base font-semibold rounded-xl shadow-md hover:scale-105 transition-all duration-200`}
+                                style={{ backgroundColor: bgColor, color: textColor }}
+                                onClick={() => mbtiSelect(code, name)}
                             >
-                                {type}
+                                {name}
                             </button>
                         ))}
+
                     </div>
                 </div>
             ) : (
@@ -198,12 +209,12 @@ const DirectItem = ({ step, scene }: IProps) => {
                             <button
                                 type="button"
                                 className="bg-indigo-500 hover:cursor-pointer text-white px-6 py-3 rounded-full shadow-lg hover:bg-indigo-600"
-                                onClick={() => {
-                                    console.log({
+                                onClick={async () => {
+                                    await completeTest({
                                         mbti: selectedMbti,
-                                        answers: questions
+                                        answers: questions,
+                                        scene: sceneObj
                                     });
-                                    router.push('/mbti/complete');
                                 }}
                             >
                                 결과 확인하기
@@ -217,3 +228,5 @@ const DirectItem = ({ step, scene }: IProps) => {
 };
 
 export default DirectItem;
+
+

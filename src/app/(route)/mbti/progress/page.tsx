@@ -4,11 +4,13 @@ import Layout from '@/components/common/Layout/Layout';
 import ClientPage from '@/app/(route)/mbti/progress/_components/ClientPage';
 
 export default async function Page({ searchParams }: any) {
-    // const step = typeof searchParams?.step === 'string' ? await searchParams.step : 'scene';
-    const step = await searchParams?.step || 'scene';
+    const resolvedSearchParams = await searchParams;
 
-    // const scene = typeof searchParams?.scene === 'string' ? searchParams.scene : 'alone';
-    const scene = await searchParams?.scene || 'alone';
+    const stepParam = resolvedSearchParams?.step;
+    const sceneParam = resolvedSearchParams?.scene;
+
+    const step = typeof stepParam === 'string' ? stepParam : 'scene';
+    const scene = typeof sceneParam === 'string' ? sceneParam : 'alone';
 
     return (
         <Layout>

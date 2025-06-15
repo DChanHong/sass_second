@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import RQProvider from '@/components/providers/RQProvider';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,11 +35,17 @@ export default function RootLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const queryClient = new QueryClient();
+    const dehydratedState = dehydrate(queryClient);
     return (
         <html lang="ko">
         <body className={inter.className} suppressHydrationWarning={true}>
         <div className="flex flex-col min-h-screen min-w-[350px]">
-            <main className="flex-grow">{children}</main>
+            <RQProvider>
+                <HydrationBoundary state={dehydratedState}>
+                    <main className="flex-grow">{children}</main>
+                </HydrationBoundary>
+            </RQProvider>
         </div>
         </body>
         </html>

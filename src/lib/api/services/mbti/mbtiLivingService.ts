@@ -1,13 +1,27 @@
 import { CreateMbtiResultDto } from '@/lib/api/dto/mbti/mbtiLivingDto';
-import { insertMbtiResult, selectMbtiResultByType } from '@/lib/api/repository/mbti/mbtiLivingRepository';
+import MbtiLivingRepository from '@/lib/api/repository/mbti/mbtiLivingRepository';
 
 
-export async function createMbtiLivingResult(dto: CreateMbtiResultDto) {
-    return await insertMbtiResult(dto);
+export default class MBtiLivingService {
+    private static instance: MBtiLivingService;
+    private mbtiLivingRepository: MbtiLivingRepository;
+
+    constructor() {
+        this.mbtiLivingRepository = new MbtiLivingRepository();
+    }
+
+    public static getInstance(): MBtiLivingService {
+        if (!MBtiLivingService.instance) {
+            MBtiLivingService.instance = new MBtiLivingService();
+        }
+        return MBtiLivingService.instance;
+    }
+
+    async createMbtiLivingResult(dto: CreateMbtiResultDto) {
+        return await this.mbtiLivingRepository.insertMbtiResult(dto);
+    }
+
+    async getByUuidLivingSingleResult(uuid: string) {
+        return await this.mbtiLivingRepository.selectMbtiResultByUuid(uuid);
+    }
 }
-
-
-export async function getMbtiResultByType(mbtiType: string) {
-    return await selectMbtiResultByType(mbtiType);
-}
-

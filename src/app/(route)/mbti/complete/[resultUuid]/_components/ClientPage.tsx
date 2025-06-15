@@ -5,34 +5,12 @@ import { moodDeaungList } from '@/mockupData/coupang';
 import Image from 'next/image';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import Link from 'next/link';
+import { useMbtiResult } from '@/actions/mbtiResult';
+import Loader from '@/components/common/Loader/Loader';
 
-const AnimatedCount = ({ target, trigger }: { target: number; trigger: boolean }) => {
-    const [count, setCount] = useState(0);
-    useEffect(() => {
-        if (!trigger) return;
-        let start = 0;
-        const duration = 1000;
-        const stepTime = 20;
-        const totalSteps = Math.ceil(duration / stepTime);
-        const increment = target / totalSteps;
+const ClientPage = ({ resultUuid }: { resultUuid: string }) => {
+    const { data: resultData, status: resultDataStatus } = useMbtiResult(resultUuid);
 
-        const interval = setInterval(() => {
-            start += increment;
-            if (start >= target) {
-                setCount(target);
-                clearInterval(interval);
-            } else {
-                setCount(Math.round(start));
-            }
-        }, stepTime);
-
-        return () => clearInterval(interval);
-    }, [trigger, target]);
-
-    return <span>{count}%</span>;
-};
-
-const ClientPage = () => {
     const { width, height } = useWindowSize();
     const mbtiType = 'INTJ';
     const mbtiTitle = '감성 설계자';
@@ -69,6 +47,7 @@ const ClientPage = () => {
 
     return (
         <div className="max-w-[1000px] mx-auto px-4 py-16 text-emerald-900">
+            {resultDataStatus !== 'success' && (<Loader />)}
             <header className="mb-10 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-2">
                     당신의 MBTI는 <span className="text-indigo-600">{mbtiType}</span>
@@ -78,19 +57,27 @@ const ClientPage = () => {
             <div className={`flex flex-col gap-[40px]`}>
                 <section className="grid md:grid-cols-2 gap-6">
                     <div>
-                        <h3 className="text-xl font-semibold mb-4">🧩 나의 선택 분석</h3>
+                        <h3 className="text-xl font-semibold mb-4">🧩 나의 선택</h3>
                         <ul className="space-y-2">
-                            {[
-                                '혼자 있는 조용한 공간을 선택했어요.',
-                                '색상은 무채색 / 그레이 계열을 선호해요.',
-                                '조명은 은은한 간접조명을 선택했어요.',
-                                '수납은 정리정돈이 잘 되는 가구를 선호해요.'
-                            ].map((text, idx) => (
-                                <li key={idx}
-                                    className="bg-white border-l-4 border-indigo-500 p-4 rounded-md shadow-sm">
+                            {resultData?.data?.preferenceSummary?.map((text, idx) => (
+                                <li
+                                    key={idx}
+                                    className="bg-white border-l-4 border-indigo-500 p-4 rounded-md shadow-sm"
+                                >
                                     {text}
                                 </li>
                             ))}
+                            {/*{[*/}
+                            {/*    '혼자 있는 조용한 공간을 선택했어요.',*/}
+                            {/*    '색상은 무채색 / 그레이 계열을 선호해요.',*/}
+                            {/*    '조명은 은은한 간접조명을 선택했어요.',*/}
+                            {/*    '수납은 정리정돈이 잘 되는 가구를 선호해요.'*/}
+                            {/*].map((text, idx) => (*/}
+                            {/*    <li key={idx}*/}
+                            {/*        className="bg-white border-l-4 border-indigo-500 p-4 rounded-md shadow-sm">*/}
+                            {/*        {text}*/}
+                            {/*    </li>*/}
+                            {/*))}*/}
                         </ul>
                     </div>
 
@@ -151,9 +138,9 @@ const ClientPage = () => {
 
 
                 <section className="">
-                    <h3 className="text-2xl font-bold mb-4">🧠 INTJ 성향 분석</h3>
+                    <h3 className="text-2xl font-bold mb-4">🧠 {resultData?.data?.mbti?.name || ''} 성향 분석</h3>
                     <p className="whitespace-pre-wrap bg-emerald-50 p-4 rounded-lg border border-emerald-200 shadow-sm text-emerald-800">
-                        {mbtiDescription}
+                        {resultData?.data?.mbtiAnalysisSummary || ''}
                     </p>
                 </section>
 
@@ -214,3 +201,31 @@ const ClientPage = () => {
 };
 
 export default ClientPage;
+
+
+const AnimatedCount = ({ target, trigger }: { target: number; trigger: boolean }) => {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        if (!trigger) return;
+        let start = 0;
+        const duration = 1000;
+        const stepTime = 20;
+        const totalSteps = Math.ceil(duration / stepTime);
+        const increment = target / totalSteps;
+
+        const interval = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+                setCount(target);
+                clearInterval(interval);
+            } else {
+                setCount(Math.round(start));
+            }
+        }, stepTime);
+
+        return () => clearInterval(interval);
+    }, [trigger, target]);
+
+    return <span>{count}%</span>;
+};
+

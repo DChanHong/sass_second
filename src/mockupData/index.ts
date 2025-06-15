@@ -18,6 +18,7 @@ export type SceneQuestion = {
 };
 
 export const mbtiSceneQuestionMap: Record<string, SceneQuestion[]> = {
+    //
     alone: [
         {
             id: 'alone-1',
