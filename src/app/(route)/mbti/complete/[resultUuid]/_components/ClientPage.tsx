@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { moodDeaungList } from '@/mockupData/coupang';
 import Image from 'next/image';
-import { useWindowSize } from '@/hooks/useWindowSize';
+import { useWindowSize } from '@/lib/hooks/useWindowSize';
 import Link from 'next/link';
 import { useMbtiResult } from '@/actions/mbtiResult';
 import Loader from '@/components/common/Loader/Loader';
