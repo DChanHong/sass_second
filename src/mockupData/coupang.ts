@@ -12,6 +12,7 @@
  * (1년 이하의 징역 또는 1천만원 이하의 벌금)의 대상이 될 수 있으니 이 점 유의하시기 바랍니다.
  */
 export const moodDeaungList = [
+    // 무드등
     {
         alt: '루아즈 패브릭 단스탠드 무드등 KGP-003, 혼합색상',
         imgPath: 'https://static.coupangcdn.com/image/affiliate/banner/3a9f7985f016914daf5d8c05655c0b1b@2x.jpg',
@@ -59,5 +60,110 @@ export const moodDeaungList = [
         width: '120',
         height: '240',
         originalUrl: `<a href="https://link.coupang.com/a/cxJqKT" target="_blank" referrerpolicy="unsafe-url"><img src="https://image14.coupangcdn.com/image/affiliate/banner/56782e689d426f4420546c0e6e143ec5@2x.jpg" alt="레토 포켓몬 피카츄 LED 무드등, 혼합색상" width="120" height="240"></a>`
-    }
+    },
+    
 ];
+
+
+export const deskList = [
+    {
+      alt: "이엔비 L자형 코너 책상, 블랙",
+      imgPath: "https://image3.coupangcdn.com/image/affiliate/banner/d11ea260a3321a774aa8f4ed43534b74@2x.jpg",
+      link: "https://link.coupang.com/a/cPQUtI",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQUtI" target="_blank" referrerpolicy="unsafe-url"><img src="https://image3.coupangcdn.com/image/affiliate/banner/d11ea260a3321a774aa8f4ed43534b74@2x.jpg" alt="이엔비 L자형 코너 책상, 블랙" width="120" height="240"></a>`
+    },
+    {
+      alt: "편안홈 다기능 철제 책상 오피스데스크 컴퓨터책상 업그레이드 타공보드, 화이트",
+      imgPath: "https://img1a.coupangcdn.com/image/affiliate/banner/3ad431267f3f13cc57ceac9e8d08eba6@2x.jpg",
+      link: "https://link.coupang.com/a/cPQUAW",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQUAW" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1a.coupangcdn.com/image/affiliate/banner/3ad431267f3f13cc57ceac9e8d08eba6@2x.jpg" alt="편안홈 다기능 철제 책상 오피스데스크 컴퓨터책상 업그레이드 타공보드, 화이트" width="120" height="240"></a>`
+    },
+    {
+      alt: "Jeway 책상 테이블 다용도책상 컴퓨터책상 사무용책상 튼튼한 업그레이드형 우유니화이트",
+      imgPath: "https://img5a.coupangcdn.com/image/affiliate/banner/cf36ed90fc95b51a316a071d0840e2b9@2x.jpg",
+      link: "https://link.coupang.com/a/cPQUGi",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQUGi" target="_blank" referrerpolicy="unsafe-url"><img src="https://img5a.coupangcdn.com/image/affiliate/banner/cf36ed90fc95b51a316a071d0840e2b9@2x.jpg" alt="Jeway 책상 테이블 다용도책상 컴퓨터책상 사무용책상 튼튼한 업그레이드형 우유니화이트" width="120" height="240"></a>`
+    },
+    {
+      alt: "Unihome E0급 친환경 컴퓨터 사무용 책상 튼튼한 1인용 학생 공부 테이블, 화이트",
+      imgPath: "https://img2c.coupangcdn.com/image/affiliate/banner/bdc6e3edfd474a7ed63dd325bc26dfa1@2x.jpg",
+      link: "https://link.coupang.com/a/cPQULC",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQULC" target="_blank" referrerpolicy="unsafe-url"><img src="https://img2c.coupangcdn.com/image/affiliate/banner/bdc6e3edfd474a7ed63dd325bc26dfa1@2x.jpg" alt="Unihome E0급 친환경 컴퓨터 사무용 책상 튼튼한 1인용 학생 공부 테이블, 화이트" width="120" height="240"></a>`
+    },
+    {
+      alt: "루나글램 게이밍 컴퓨터 책상 하단 선반 1600, 화이트",
+      imgPath: "https://image5.coupangcdn.com/image/affiliate/banner/89b2c27054aaf81c94ba902918db0b98@2x.jpg",
+      link: "https://link.coupang.com/a/cPQUUh",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQUUh" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/89b2c27054aaf81c94ba902918db0b98@2x.jpg" alt="루나글램 게이밍 컴퓨터 책상 하단 선반 1600, 화이트" width="120" height="240"></a>`
+    },
+    {
+      alt: "루나글램 게이밍 컴퓨터 책상 하단 선반 1600, 화이트",
+      imgPath: "https://img4a.coupangcdn.com/image/affiliate/banner/89b2c27054aaf81c94ba902918db0b98@2x.jpg",
+      link: "https://link.coupang.com/a/cPQUY3",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQUY3" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4a.coupangcdn.com/image/affiliate/banner/89b2c27054aaf81c94ba902918db0b98@2x.jpg" alt="루나글램 게이밍 컴퓨터 책상 하단 선반 1600, 화이트" width="120" height="240"></a>`
+    },
+    {
+      alt: "Sonipure 책상 서랍이 달린 컴퓨터 책상 심플하다 사무용 책상",
+      imgPath: "https://image5.coupangcdn.com/image/affiliate/banner/be2b1c3bce5c48f94cecc1757ded72ec@2x.jpg",
+      link: "https://link.coupang.com/a/cPQU39",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQU39" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/be2b1c3bce5c48f94cecc1757ded72ec@2x.jpg" alt="Sonipure 책상 서랍이 달린 컴퓨터 책상 심플하다 사무용 책상" width="120" height="240"></a>`
+    },
+    {
+      alt: "공부 책상 다용도 사무실책상 800/1000 화이트 책상 SZ03",
+      imgPath: "https://img3a.coupangcdn.com/image/affiliate/banner/30bdd99e2e7279b687557f107ff73d28@2x.jpg",
+      link: "https://link.coupang.com/a/cPQU7P",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQU7P" target="_blank" referrerpolicy="unsafe-url"><img src="https://img3a.coupangcdn.com/image/affiliate/banner/30bdd99e2e7279b687557f107ff73d28@2x.jpg" alt="공부 책상 다용도 사무실책상 800/1000 화이트 책상 SZ03" width="120" height="240"></a>`
+    }
+  ]
+  
+  export const vacuumList = [
+    {
+      alt: "[최신형] 틴도우 차이슨 무선청소기 BLDC 스틱형 원룸 청소기+물걸레 기트+다양한 구성품, 퍼플, V07",
+      imgPath: "https://image7.coupangcdn.com/image/affiliate/banner/51ca7e653158286643f3a89ba006ae7d@2x.jpg",
+      link: "https://link.coupang.com/a/cPQVtA",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQVtA" target="_blank" referrerpolicy="unsafe-url"><img src="https://image7.coupangcdn.com/image/affiliate/banner/51ca7e653158286643f3a89ba006ae7d@2x.jpg" alt="[최신형] 틴도우 차이슨 무선청소기 BLDC 스틱형 원룸 청소기+물걸레 기트+다양한 구성품, 퍼플, V07" width="120" height="240"></a>`
+    },
+    {
+      alt: "[최신형] 홈리아 차이슨 무선 청소기 흡입력 좋은 진공청소기 + 다양한 구성품, 90D",
+      imgPath: "https://img1c.coupangcdn.com/image/affiliate/banner/b21909dcdc083971dfecf442d0266005@2x.jpg",
+      link: "https://link.coupang.com/a/cPQVxb",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQVxb" target="_blank" referrerpolicy="unsafe-url"><img src="https://img1c.coupangcdn.com/image/affiliate/banner/b21909dcdc083971dfecf442d0266005@2x.jpg" alt="[최신형] 홈리아 차이슨 무선 청소기 흡입력 좋은 진공청소기 + 다양한 구성품, 90D" width="120" height="240"></a>`
+    },
+    {
+      alt: "[한경희] 2025년형 클린타워 무선청소기 (자동 먼지통비움+자동충전), HCV-B400 PRO",
+      imgPath: "https://img4c.coupangcdn.com/image/affiliate/banner/d3b72f5debf991c09c09d2e85bfa97b6@2x.jpg",
+      link: "https://link.coupang.com/a/cPQVEA",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQVEA" target="_blank" referrerpolicy="unsafe-url"><img src="https://img4c.coupangcdn.com/image/affiliate/banner/d3b72f5debf991c09c09d2e85bfa97b6@2x.jpg" alt="[한경희] 2025년형 클린타워 무선청소기 (자동 먼지통비움+자동충전), HCV-B400 PRO" width="120" height="240"></a>`
+    },
+    {
+      alt: "[최신형] 프리티케어 33KPa의 강력한 흡입력을 가진 스틱형 진공청소기 애완동물 털을 위한 경량 무선 진공청소기, W200 White",
+      imgPath: "https://image5.coupangcdn.com/image/affiliate/banner/21e8cbc6953ee07dc80f0b6305c1385b@2x.jpg",
+      link: "https://link.coupang.com/a/cPQVJT",
+      width: "120",
+      height: "240",
+      originalUrl: `<a href="https://link.coupang.com/a/cPQVJT" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/21e8cbc6953ee07dc80f0b6305c1385b@2x.jpg" alt="[최신형] 프리티케어 33KPa의 강력한 흡입력을 가진 스틱형 진공청소기 애완동물 털을 위한 경량 무선 진공청소기, W200 White" width="120" height="240"></a>`
+    }
+  ]
+  

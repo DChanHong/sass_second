@@ -5,7 +5,6 @@ import Layout from '@/components/common/Layout/Layout';
 const MbtiCompletePage = async ({ params }: { params: Promise<{ resultUuid: string }> }) => {
     const { resultUuid } = await params;
 
-
     return (
         <Layout>
             <ClientPage resultUuid={resultUuid} />

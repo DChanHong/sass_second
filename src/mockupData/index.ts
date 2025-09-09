@@ -1,7 +1,7 @@
 export const mbtiSituationMockupData = [
     { icon: '🌙', text: '혼자만의 시간을 중요하게 생각해요', code: 'alone' },
     { icon: '🛋️', text: '집에서 쉬는 걸 가장 좋아해요', code: 'relax' },
-    { icon: '❓', text: 'MBTI를 모르시나요? 나의 MBTI 찾기', isMbti: true }, // 특별 항목
+    // { icon: '❓', text: 'MBTI를 모르시나요? 나의 MBTI 찾기', isMbti: true }, // 특별 항목
     { icon: '🎨', text: '감성적인 인테리어를 좋아해요', code: 'emotional' },
     { icon: '📦', text: '실용성이 가장 중요해요', code: 'practical' }
 ];

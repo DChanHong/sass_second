@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { moodDeaungList } from '@/mockupData/coupang';
+import NotFound from '@/app/not-found';
 
 const Page = () => {
   const [croppedImg, setCroppedImg] = useState<string | null>(null);
   const [colorArr, setColorArr] = useState<string[]>([]);
 
   const test = async () => {
+
+    
     const res = await fetch('/api/v1/image-analyze', {
       method: 'POST',
       body: JSON.stringify({ imgPath: [moodDeaungList[0]?.imgPath] }),
@@ -19,6 +22,10 @@ const Page = () => {
       setColorArr(data.data.colors);
     }
   };
+
+  if (process.env.NODE_ENV !== "development") {
+    return <NotFound />;
+  }
 
   return (
     <div className="p-4 space-y-4">
