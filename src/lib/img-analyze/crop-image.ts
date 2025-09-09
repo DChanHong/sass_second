@@ -1,7 +1,5 @@
-import smartcrop from 'smartcrop-sharp';
 import sharp from 'sharp';
 import axios from 'axios';
-
 export interface CropOptions {
   width?: number;
   height?: number;
@@ -74,79 +72,56 @@ export async function cropImage(imgUrl: string, options: CropOptions = {}): Prom
   const paddingLeft = Math.floor(imgWidth * leftPadding);
   const paddingTop = Math.floor(imgHeight * topPadding);
 
-  let cropResult;
-  
-  if (strategy === 'smart') {
-    // 패딩 영역을 제외하고 스마트 크롭 적용
-    const paddedBuffer = await sharp(buffer)
-      .extract({
-        left: paddingLeft,
-        top: paddingTop,
-        width: Math.floor(availableWidth),
-        height: Math.floor(availableHeight)
-      })
-      .toBuffer();
+  // 최종 크기가 사용 가능 영역을 넘지 않도록 보정
+  const adjustedWidth = Math.min(finalWidth, Math.floor(availableWidth));
+  const adjustedHeight = Math.min(finalHeight, Math.floor(availableHeight));
 
-    const smartCropResult = await smartcrop.crop(paddedBuffer, { 
-      width: finalWidth, 
-      height: finalHeight,
-      boost: [
-        // 상품 이미지는 보통 중앙에 위치하므로 중앙 부분에 가중치
-        { x: 0.2, y: 0.2, width: 0.6, height: 0.6, weight: 1.0 }
-      ]
-    });
-    
-    // 패딩 오프셋을 다시 추가
-    cropResult = {
-      topCrop: {
-        x: smartCropResult.topCrop.x + paddingLeft,
-        y: smartCropResult.topCrop.y + paddingTop,
-        width: smartCropResult.topCrop.width,
-        height: smartCropResult.topCrop.height
-      }
-    };
-  } else {
-    // 다른 전략들은 직접 구현
-    let x = 0, y = 0;
-    
-    switch (strategy) {
-      case 'center':
-        x = Math.max(paddingLeft, Math.floor(paddingLeft + (availableWidth - finalWidth) / 2));
-        y = Math.max(paddingTop, Math.floor(paddingTop + (availableHeight - finalHeight) / 2));
-        break;
-      case 'middle':
-        // 쿠팡 이미지에 최적화: 상단/하단 패딩을 적용하고 중앙 크롭
-        x = Math.max(paddingLeft, Math.floor(paddingLeft + (availableWidth - finalWidth) / 2));
-        y = Math.max(paddingTop, Math.floor(paddingTop + (availableHeight - finalHeight) / 2));
-        break;
-      case 'top':
-        x = Math.max(paddingLeft, Math.floor(paddingLeft + (availableWidth - finalWidth) / 2));
-        y = paddingTop;
-        break;
-      case 'bottom':
-        x = Math.max(paddingLeft, Math.floor(paddingLeft + (availableWidth - finalWidth) / 2));
-        y = Math.max(paddingTop, Math.floor(paddingTop + availableHeight - finalHeight));
-        break;
-    }
-    
-    cropResult = {
-      topCrop: { x, y, width: finalWidth, height: finalHeight }
-    };
+  // smart, middle 은 center 로 동작하도록 매핑
+  const normalizedStrategy = ((): 'center' | 'top' | 'bottom' => {
+    if (strategy === 'top') return 'top';
+    if (strategy === 'bottom') return 'bottom';
+    return 'center';
+  })();
+
+  // 좌표 계산 (패딩 내부에서만 위치하도록)
+  const minX = paddingLeft;
+  const maxX = paddingLeft + Math.floor(availableWidth) - adjustedWidth;
+  const minY = paddingTop;
+  const maxY = paddingTop + Math.floor(availableHeight) - adjustedHeight;
+
+  let x = minX;
+  let y = minY;
+
+  switch (normalizedStrategy) {
+    case 'center':
+      x = Math.max(minX, Math.floor(paddingLeft + (availableWidth - adjustedWidth) / 2));
+      y = Math.max(minY, Math.floor(paddingTop + (availableHeight - adjustedHeight) / 2));
+      break;
+    case 'top':
+      x = Math.max(minX, Math.floor(paddingLeft + (availableWidth - adjustedWidth) / 2));
+      y = minY;
+      break;
+    case 'bottom':
+      x = Math.max(minX, Math.floor(paddingLeft + (availableWidth - adjustedWidth) / 2));
+      y = Math.max(minY, maxY);
+      break;
   }
 
-  const crop = cropResult.topCrop;
+  // 경계 보정
+  x = Math.min(Math.max(x, minX), Math.max(minX, maxX));
+  y = Math.min(Math.max(y, minY), Math.max(minY, maxY));
 
   const croppedBuffer = await sharp(buffer)
-    .extract({ width: crop.width, height: crop.height, left: crop.x, top: crop.y })
+    .extract({ width: adjustedWidth, height: adjustedHeight, left: x, top: y })
     .toBuffer();
 
   return {
     buffer: croppedBuffer,
     cropInfo: {
-      x: crop.x,
-      y: crop.y,
-      width: crop.width,
-      height: crop.height,
+      x,
+      y,
+      width: adjustedWidth,
+      height: adjustedHeight,
       originalWidth: metadata.width || 0,
       originalHeight: metadata.height || 0,
     }
