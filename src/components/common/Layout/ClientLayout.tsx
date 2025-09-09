@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Footer from '../Footer';
-import { cn } from '@/lib/utils';
+import { cn } from '@/mockupData/utils';
 
 interface ClientLayoutProps {
     children: React.ReactNode;
