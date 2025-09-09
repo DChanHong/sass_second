@@ -28,7 +28,6 @@ const ClientPage = ({ step, scene }: {
             } else {
 
             }
-
         } catch (err) {
             console.error('저장 실패:', err);
         } finally {
@@ -39,6 +38,7 @@ const ClientPage = ({ step, scene }: {
 
     const renderStep = (step: string, scene: string) => {
         // 엠비티아이부터 시작
+        // TODO : MBTI 진행시 검사 진행 시 
         if (step === 'mbti') {
             return (
                 <MbtiStart step={step} scene={scene} />

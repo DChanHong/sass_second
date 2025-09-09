@@ -15,6 +15,7 @@ const ClientPage = ({ layoutOption }: {
 
     const handleSelect = (scene: { text: string; code?: string; isMbti?: boolean }) => {
         if (scene.isMbti) {
+            //TODO : 본인의 MBTI를 모를경우에 사용
             router.push('/mbti/progress?step=mbti');
         } else if (scene.code) {
             router.push(`/mbti/progress?step=scene&scene=${scene.code}`);
@@ -39,11 +40,11 @@ const ClientPage = ({ layoutOption }: {
                             type={'button'}
                             key={idx}
                             onClick={() => handleSelect(s)}
-                            className={`hover:cursor-pointer w-full flex justify-center items-center gap-4 px-6 py-4 rounded-xl font-medium shadow-sm transition-all hover:shadow-md
-                                ${s.isMbti
-                                ? 'bg-sky-100 hover:bg-sky-200 text-sky-800 border border-sky-200'
-                                : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200'
-                            }`}
+                            className={`
+                                hover:cursor-pointer w-full flex justify-center items-center gap-4 px-6 py-4 rounded-xl font-medium shadow-sm transition-all hover:shadow-md
+                                bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200
+                                }`}
+                            // bg-sky-100 hover:bg-sky-200 text-sky-800 border border-sky-200
                         >
                             <span className="text-2xl">{s.icon}</span>
                             <span className="text-left">{s.text}</span>
