@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import RQProvider from '@/components/providers/RQProvider';
+import { ToastProvider } from '@/contexts/ToastContext';
+import { ToastContainer } from '@/components/common/Toast';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -41,11 +43,14 @@ export default function RootLayout({
         <html lang="ko">
         <body className={inter.className} suppressHydrationWarning={true}>
         <div className="flex flex-col min-h-screen min-w-[350px]">
-            <RQProvider>
-                <HydrationBoundary state={dehydratedState}>
-                    <main className="flex-grow">{children}</main>
-                </HydrationBoundary>
-            </RQProvider>
+            <ToastProvider>
+                <RQProvider>
+                    <HydrationBoundary state={dehydratedState}>
+                        <main className="flex-grow">{children}</main>
+                    </HydrationBoundary>
+                </RQProvider>
+                <ToastContainer />
+            </ToastProvider>
         </div>
         </body>
         </html>

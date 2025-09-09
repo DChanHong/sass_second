@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import NotFound from '@/app/not-found';
 
 interface CropResult {
   index: number;
@@ -79,6 +80,9 @@ export default function CropTestPage() {
     }
     return label;
   };
+  if (process.env.NODE_ENV !== "development") {
+    return <NotFound />;
+  }
 
   return (
     <div className="container mx-auto p-6">

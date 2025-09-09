@@ -141,7 +141,7 @@ export default function Section2() {
                                         <h3 className="text-xl font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors duration-200">
                                             {service.title}
                                         </h3>
-                                        <p className="text-gray-600 mt-1">{service.description}</p>
+                                        <p className="text-gray-600 mt-1 line-clamp-1">{service.description}</p>
                                     </div>
                                     <div
                                         className="text-gray-400 group-hover:text-emerald-500 transition-colors duration-200">
