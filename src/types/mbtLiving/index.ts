@@ -1,9 +1,3 @@
-// 제네릭 래퍼 타입
-export interface MBTILivingWrapper<T> {
-    result: boolean;
-    data: T;
-}
-
 export interface MbtiSelection {
     id: string;
     checked: string;

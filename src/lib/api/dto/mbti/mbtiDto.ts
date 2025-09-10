@@ -7,6 +7,8 @@ export class MbtiGetResponseDto {
     bgColor: string;
     textColor: string;
     keyword: string;
+    mainIcon: string;
+    mainDescription: string;
 
     constructor(data: any) {
         this.code = data.code;
@@ -17,5 +19,7 @@ export class MbtiGetResponseDto {
         this.bgColor = data.bgColor;
         this.textColor = data.textColor;
         this.keyword = data.keyword;
+        this.mainIcon = data.mainIcon;
+        this.mainDescription = data.mainDescription;
     }
 }

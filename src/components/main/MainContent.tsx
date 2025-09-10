@@ -6,11 +6,14 @@ import Section2 from '@/components/main/Section2';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import BounceCtaButton from '@/components/main/BounceCTAButton';
+import { useMbtiList } from '@/actions/mbti';
 
 export default function MainContent() {
 
     const ctaRef = useRef<HTMLAnchorElement | null>(null);
     const [showFloating, setShowFloating] = useState(false);
+    const { data: mbtiList } = useMbtiList();
+    
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -32,10 +35,11 @@ export default function MainContent() {
             }
         };
     }, []);
+
     return (
         <main className="min-h-screen w-[95%] m-auto sm:w-full">
             <Section1 ctaRef={ctaRef} />
-            <Section2 />
+            <Section2 mbtiList={mbtiList?.data || []} />
             <Section3 />
             {/* 하단 고정 CTA 버튼 (원래 버튼이 보이지 않을 때만) */}
             {showFloating && (

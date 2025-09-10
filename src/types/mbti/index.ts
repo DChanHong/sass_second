@@ -1,9 +1,3 @@
-// 제네릭 래퍼 타입
-export interface MBTInterfaceWrapper<T> {
-    result: boolean;
-    data: T;
-}
-
 export interface MBTIResponse {
     code: string;
     name: string;
@@ -13,4 +7,6 @@ export interface MBTIResponse {
     bgColor: string;
     textColor: string;
     sorting: number;
+    mainIcon: string;
+    mainDescription: string;
 }

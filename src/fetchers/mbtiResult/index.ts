@@ -4,6 +4,7 @@ import { MBTILivingWrapper, MbtiResult } from '@/types/mbtLiving';
 const END_POINT = {
     CREATE_MBTI_RESULT: '/api/v1/mbti/living/result',
     GET_MBTI_RESULT_SINGLE: '/api/v1/mbti/living/result/detail'
+    
 
 };
 

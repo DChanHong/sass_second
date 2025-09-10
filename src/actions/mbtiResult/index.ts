@@ -26,3 +26,4 @@ export const useMbtiResult = (uuid: string) => {
         refetchOnWindowFocus: false // 포커스시 재요청 X
     });
 };
+

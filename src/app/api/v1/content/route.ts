@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import MbtiContentService from '@/lib/api/services/mbti/mbtiContentService';
+import type { ApiResult } from '@/types/api';
 
 const mbtiContentService = MbtiContentService.getInstance();
 
@@ -27,11 +28,11 @@ export async function GET(request: NextRequest) {
 
         // 필수 파라미터 검증
         if (!mbtiCode) {
-            return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'mbtiCode parameter is required',
-                    message: 'MBTI 코드를 제공해주세요.'
+            return NextResponse.json<ApiResult>(
+                {
+                    result: false,
+                    data: null,
+                    error: 'MBTI 코드를 제공해주세요.'
                 },
                 { status: 400 }
             );
@@ -48,44 +49,44 @@ export async function GET(request: NextRequest) {
 
         // 파라미터 유효성 검사
         if (requestData.page < 1) {
-            return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'Invalid page parameter',
-                    message: '페이지 번호는 1 이상이어야 합니다.'
+            return NextResponse.json<ApiResult>(
+                {
+                    result: false,
+                    data: null,
+                    error: '페이지 번호는 1 이상이어야 합니다.'
                 },
                 { status: 400 }
             );
         }
 
         if (requestData.limit < 1 || requestData.limit > 50) {
-            return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'Invalid limit parameter',
-                    message: 'limit은 1-50 사이의 값이어야 합니다.'
+            return NextResponse.json<ApiResult>(
+                {
+                    result: false,
+                    data: null,
+                    error: 'limit은 1-50 사이의 값이어야 합니다.'
                 },
                 { status: 400 }
             );
         }
 
         if (!['createdAt', 'uuid'].includes(requestData.sortBy)) {
-            return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'Invalid sortBy parameter',
-                    message: 'sortBy는 createdAt 또는 uuid이어야 합니다.'
+            return NextResponse.json<ApiResult>(
+                {
+                    result: false,
+                    data: null,
+                    error: 'sortBy는 createdAt 또는 uuid이어야 합니다.'
                 },
                 { status: 400 }
             );
         }
 
         if (!['asc', 'desc'].includes(requestData.sortOrder)) {
-            return NextResponse.json(
-                { 
-                    success: false, 
-                    error: 'Invalid sortOrder parameter',
-                    message: 'sortOrder는 asc 또는 desc이어야 합니다.'
+            return NextResponse.json<ApiResult>(
+                {
+                    result: false,
+                    data: null,
+                    error: 'sortOrder는 asc 또는 desc이어야 합니다.'
                 },
                 { status: 400 }
             );
@@ -94,27 +95,27 @@ export async function GET(request: NextRequest) {
         console.log('📡 Content API request:', requestData);
 
         // 서비스 호출
-        const result = await mbtiContentService.getContentList(requestData);
+        const serviceResult = await mbtiContentService.getContentList(requestData);
 
         console.log('✅ Content API success:', {
             mbtiCode: requestData.mbtiCode,
-            itemsReturned: result.items.length,
-            total: result.pagination.total
+            itemsReturned: serviceResult.items.length,
+            total: serviceResult.pagination.total
         });
 
-        return NextResponse.json({
-            success: true,
-            data: result
+        return NextResponse.json<ApiResult>({
+            result: true,
+            data: serviceResult
         });
 
     } catch (error) {
         console.error('❌ Content API error:', error);
         
-        return NextResponse.json(
-            { 
-                success: false, 
-                error: 'Internal server error',
-                message: '서버 내부 오류가 발생했습니다.'
+        return NextResponse.json<ApiResult>(
+            {
+                result: false,
+                data: null,
+                error: '서버 내부 오류가 발생했습니다.'
             },
             { status: 500 }
         );
