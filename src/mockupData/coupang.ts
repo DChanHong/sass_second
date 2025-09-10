@@ -166,4 +166,105 @@ export const deskList = [
       originalUrl: `<a href="https://link.coupang.com/a/cPQVJT" target="_blank" referrerpolicy="unsafe-url"><img src="https://image5.coupangcdn.com/image/affiliate/banner/21e8cbc6953ee07dc80f0b6305c1385b@2x.jpg" alt="[최신형] 프리티케어 33KPa의 강력한 흡입력을 가진 스틱형 진공청소기 애완동물 털을 위한 경량 무선 진공청소기, W200 White" width="120" height="240"></a>`
     }
   ]
+
+// 카테고리 타입 정의
+export type CategoryKey = 'desk' | 'moodLight' | 'vacuum';
+
+// 카테고리별 대표 정보
+export const categoryInfo = {
+  desk: {
+    name: '책상',
+    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=300&h=300&fit=crop&crop=center',
+    emoji: '🪑',
+    description: '나만의 작업 공간'
+  },
+  moodLight: {
+    name: '무드등',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=center', 
+    emoji: '💡',
+    description: '감성적인 조명'
+  },
+  vacuum: {
+    name: '청소기',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop&crop=center',
+    emoji: '🧹', 
+    description: '깔끔한 청소'
+  }
+};
+
+// MBTI별 패키지 세트
+export const mbtiPackageSets = [
+  {
+    mbti: 'ENFP',
+    title: 'ENFP 감성템 패키지',
+    description: '창의적이고 감성적인 당신을 위한 조합',
+    categories: ['moodLight', 'desk', 'vacuum'],
+    gradient: 'from-pink-50 to-purple-50',
+    links: {
+      moodLight: moodDeaungList[0].link,
+      desk: deskList[2].link, 
+      vacuum: vacuumList[0].link
+    }
+  },
+  {
+    mbti: 'ISTJ',
+    title: 'ISTJ 정리왕 패키지', 
+    description: '체계적이고 실용적인 당신을 위한 조합',
+    categories: ['desk', 'vacuum', 'moodLight'],
+    gradient: 'from-blue-50 to-indigo-50',
+    links: {
+      desk: deskList[1].link,
+      vacuum: vacuumList[2].link,
+      moodLight: moodDeaungList[3].link
+    }
+  },
+  {
+    mbti: 'INFP',
+    title: 'INFP 감성충만 패키지',
+    description: '내향적이고 감성적인 당신을 위한 조합',
+    categories: ['moodLight', 'vacuum', 'desk'],
+    gradient: 'from-purple-50 to-indigo-50',
+    links: {
+      moodLight: moodDeaungList[2].link,
+      vacuum: vacuumList[1].link,
+      desk: deskList[3].link
+    }
+  },
+  {
+    mbti: 'ESTP',
+    title: 'ESTP 실용템 패키지',
+    description: '활동적이고 실용적인 당신을 위한 조합',
+    categories: ['vacuum', 'desk', 'moodLight'],
+    gradient: 'from-green-50 to-emerald-50',
+    links: {
+      vacuum: vacuumList[3].link,
+      desk: deskList[4].link,
+      moodLight: moodDeaungList[4].link
+    }
+  },
+  {
+    mbti: 'INTJ',
+    title: 'INTJ 효율왕 패키지',
+    description: '논리적이고 효율적인 당신을 위한 조합',
+    categories: ['desk', 'moodLight', 'vacuum'],
+    gradient: 'from-gray-50 to-slate-50',
+    links: {
+      desk: deskList[0].link,
+      moodLight: moodDeaungList[1].link,
+      vacuum: vacuumList[0].link
+    }
+  },
+  {
+    mbti: 'ESFP',
+    title: 'ESFP 활력템 패키지',
+    description: '사교적이고 활발한 당신을 위한 조합',
+    categories: ['moodLight', 'vacuum', 'desk'],
+    gradient: 'from-yellow-50 to-orange-50',
+    links: {
+      moodLight: moodDeaungList[5].link,
+      vacuum: vacuumList[1].link,
+      desk: deskList[5].link
+    }
+  }
+];
   

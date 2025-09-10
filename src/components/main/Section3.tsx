@@ -6,93 +6,10 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import Link from 'next/link';
+import { mbtiPackageSets, categoryInfo, CategoryKey } from '@/mockupData/coupang';
 
-const mbtiPackages = [
-    {
-        mbti: 'ENFP',
-        title: 'ENFP 감성템 패키지',
-        items: ['🌕 무드등', '🧺 원목 수납함', '🪑 크림톤 접이식 의자'],
-        image: '/main/section3/section1_mockup_1.png',
-        link: 'https://link.coupang.com/enfp-package'
-    },
-    {
-        mbti: 'ISTJ',
-        title: 'ISTJ 정리왕 패키지',
-        items: ['📦 다용도 수납박스', '🗂️ 책상 정리함', '📚 슬림 책장'],
-        image: '/main/section3/section1_mockup_2.png',
-        link: 'https://link.coupang.com/istj-package'
-    },
-    {
-        mbti: 'INFP',
-        title: 'INFP 감성충만 패키지',
-        items: ['🕯️ 향초', '🛋️ 베이지 러그', '📖 원목 사이드테이블'],
-        image: '/main/section3/section1_mockup_3.png',
-        link: 'https://link.coupang.com/infp-package'
-    },
-    {
-        mbti: 'ESTP',
-        title: 'ESTP 실용템 패키지',
-        items: ['🧹 무선 청소기', '🪑 폴딩체어', '📦 스마트 정리함'],
-        image: '/main/section3/section1_mockup_4.png',
-        link: 'https://link.coupang.com/estp-package'
-    },
-    {
-        mbti: 'ENFP',
-        title: 'ENFP 감성템 패키지',
-        items: ['🌕 무드등', '🧺 원목 수납함', '🪑 크림톤 접이식 의자'],
-        image: '/main/section3/section1_mockup_1.png',
-        link: 'https://link.coupang.com/enfp-package'
-    },
-    {
-        mbti: 'ISTJ',
-        title: 'ISTJ 정리왕 패키지',
-        items: ['📦 다용도 수납박스', '🗂️ 책상 정리함', '📚 슬림 책장'],
-        image: '/main/section3/section1_mockup_2.png',
-        link: 'https://link.coupang.com/istj-package'
-    },
-    {
-        mbti: 'INFP',
-        title: 'INFP 감성충만 패키지',
-        items: ['🕯️ 향초', '🛋️ 베이지 러그', '📖 원목 사이드테이블'],
-        image: '/main/section3/section1_mockup_3.png',
-        link: 'https://link.coupang.com/infp-package'
-    },
-    {
-        mbti: 'ESTP',
-        title: 'ESTP 실용템 패키지',
-        items: ['🧹 무선 청소기', '🪑 폴딩체어', '📦 스마트 정리함'],
-        image: '/main/section3/section1_mockup_4.png',
-        link: 'https://link.coupang.com/estp-package'
-    }, {
-        mbti: 'ENFP',
-        title: 'ENFP 감성템 패키지',
-        items: ['🌕 무드등', '🧺 원목 수납함', '🪑 크림톤 접이식 의자'],
-        image: '/main/section3/section1_mockup_1.png',
-        link: 'https://link.coupang.com/enfp-package'
-    },
-    {
-        mbti: 'ISTJ',
-        title: 'ISTJ 정리왕 패키지',
-        items: ['📦 다용도 수납박스', '🗂️ 책상 정리함', '📚 슬림 책장'],
-        image: '/main/section3/section1_mockup_2.png',
-        link: 'https://link.coupang.com/istj-package'
-    },
-    {
-        mbti: 'INFP',
-        title: 'INFP 감성충만 패키지',
-        items: ['🕯️ 향초', '🛋️ 베이지 러그', '📖 원목 사이드테이블'],
-        image: '/main/section3/section1_mockup_3.png',
-        link: 'https://link.coupang.com/infp-package'
-    },
-    {
-        mbti: 'ESTP',
-        title: 'ESTP 실용템 패키지',
-        items: ['🧹 무선 청소기', '🪑 폴딩체어', '📦 스마트 정리함'],
-        image: '/main/section3/section1_mockup_4.png',
-        link: 'https://link.coupang.com/estp-package'
-    }
-
-];
+// 스와이퍼 무한 루프를 위해 패키지를 복제
+const duplicatedPackages = [...mbtiPackageSets, ...mbtiPackageSets];
 
 export default function Section3() {
     return (
@@ -130,43 +47,77 @@ export default function Section3() {
                         allowTouchMove={false}
                     >
 
-                        {mbtiPackages.map((pkg, index) => (
+                        {duplicatedPackages.map((pkg, index) => (
                             <SwiperSlide key={index}>
-                                <Link
-                                    href={pkg.link}
-                                    target="_blank"
-                                    className={`
+                                <div className={`
                                     group block rounded-2xl shadow-md hover:shadow-xl overflow-hidden
                                     transition-shadow duration-300 border border-gray-100 h-full
-                                    bg-gradient-to-b from-emerald-50 to-white
-                                 `}
-                                >
-                                    <div className="relative overflow-hidden">
-                                        <img
-                                            src={pkg.image}
-                                            alt={pkg.title}
-                                            className="w-full h-48 object-cover rounded-t-2xl group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                                        />
-                                    </div>
+                                    bg-gradient-to-b ${pkg.gradient}
+                                 `}>
+                                    <div className="p-6">
+                                        <div className="text-center mb-4">
+                                            <span className="inline-block px-3 py-1 bg-white/80 rounded-full text-sm font-medium text-gray-700 mb-2">
+                                                {pkg.mbti}
+                                            </span>
+                                            <h3 className="text-lg font-bold text-gray-900 mb-1">
+                                                {pkg.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-600">
+                                                {pkg.description}
+                                            </p>
+                                        </div>
 
-                                    <div className="p-5 flex flex-col flex-grow transition-colors duration-300">
-                                        <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700 transition-colors duration-300">
-                                            {pkg.title}
-                                        </h3>
-                                        <ul className="text-sm text-gray-600 mb-4 space-y-1 leading-relaxed">
-                                            {pkg.items.map((item, i) => (
-                                                <li key={i}>• {item}</li>
-                                            ))}
-                                        </ul>
+                                        {/* 3개 카테고리 그리드 */}
+                                        <div className="grid grid-cols-3 gap-3 mb-6">
+                                            {pkg.categories.map((categoryKey, i) => {
+                                                const category = categoryInfo[categoryKey as CategoryKey];
+                                                return (
+                                                    <div key={i} className="text-center">
+                                                        <div className="relative overflow-hidden rounded-lg mb-2 bg-white/50">
+                                                            <img 
+                                                                src={category.image}
+                                                                alt={category.name}
+                                                                className="w-full h-16 object-cover hover:scale-105 transition-transform duration-300"
+                                                                onError={(e) => {
+                                                                    const target = e.target as HTMLImageElement;
+                                                                    target.style.display = 'none';
+                                                                    target.nextElementSibling?.classList.remove('hidden');
+                                                                }}
+                                                            />
+                                                            {/* 이미지 로드 실패 시 표시될 아이콘 */}
+                                                            <div className="hidden w-full h-16 flex items-center justify-center bg-gray-100 text-gray-400">
+                                                                <span className="text-2xl">{category.emoji}</span>
+                                                            </div>
+                                                        </div>
+                                                        <p className="text-xs font-medium text-gray-700">
+                                                            {category.emoji} {category.name}
+                                                        </p>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
 
-                                        <div
-                                            className="mt-auto inline-block w-full text-center bg-emerald-600 group-hover:bg-emerald-700
-                                                    text-white text-sm font-medium py-2 rounded-lg transition-colors duration-300"
-                                        >
-                                            자세히 보기 →
+                                        {/* 개별 링크들 */}
+                                        <div className="space-y-2">
+                                            {pkg.categories.map((categoryKey, i) => {
+                                                const category = categoryInfo[categoryKey as CategoryKey];
+                                                const link = pkg.links[categoryKey as CategoryKey];
+                                                return (
+                                                    <Link
+                                                        key={i}
+                                                        href={link}
+                                                        target="_blank"
+                                                        className="block w-full text-center bg-white/80 hover:bg-white 
+                                                                 text-gray-700 hover:text-emerald-700 text-sm font-medium 
+                                                                 py-2 rounded-lg transition-all duration-300 border border-white/50"
+                                                    >
+                                                        {category.emoji} {category.name} 보러가기
+                                                    </Link>
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                </Link>
+                                </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
